@@ -41,6 +41,10 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 			&& stripos($pUri,"search=")===false
 			&& stripos($pUri,$specPage.":ConfirmEmail")===false
 			&& stripos($pUri,$specPage.":Preferences")===false
+			&& stripos($pUri,$specPage.":Watchlist")===false
+			&& stripos($pUri,$specPage.":MyLanguage")===false
+			&& stripos($pUri,$specPage.":Contributions")===false
+			&& stripos($pUri,$specPage.":PasswordReset")===false
 			&& stripos($pUri,$specPage.":BannerLoader")===false
 	) {$chkSO=true;}
 
