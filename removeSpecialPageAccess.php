@@ -39,7 +39,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 			&& stripos($pInfo,$specPage.":".$connPage)===false
 			&& stripos($pUri,$connPage)===false
 			&& stripos($pUri,"search=")===false
-			&& stripos($pInfo,$specPage.":BannerLoader")===false
+			&& stripos($pUri,$specPage.":BannerLoader")===false
 	) {$chkSO=true;}
 
 	//Case Purge
