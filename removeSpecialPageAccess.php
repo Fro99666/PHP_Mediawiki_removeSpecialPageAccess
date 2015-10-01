@@ -40,6 +40,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 			&& stripos($pUri,$connPage)===false
 			&& stripos($pUri,"search=")===false
 			&& stripos($pUri,$specPage.":ConfirmEmail")===false
+			&& stripos($pUri,$specPage.":Preferences")===false
 			&& stripos($pUri,$specPage.":BannerLoader")===false
 	) {$chkSO=true;}
 
