@@ -35,10 +35,11 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	 $pUri=urldecode($pUri);
 
 	//Case Special Page
-	if( (stripos($pInfo,"/".$specPage.":")!==false || stripos($pUri,$specPage.":")!==false)
+	if	( (stripos($pInfo,"/".$specPage.":")!==false || stripos($pUri,$specPage.":")!==false)
 			&& stripos($pInfo,$specPage.":".$connPage)===false
 			&& stripos($pUri,$connPage)===false
 			&& stripos($pUri,"search=")===false
+			&& stripos($pUri,"action=purge")===false
 			&& stripos($pUri,$specPage.":ConfirmEmail")===false
 			&& stripos($pUri,$specPage.":Preferences")===false
 			&& stripos($pUri,$specPage.":Watchlist")===false
@@ -46,19 +47,16 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 			&& stripos($pUri,$specPage.":Contributions")===false
 			&& stripos($pUri,$specPage.":PasswordReset")===false
 			&& stripos($pUri,$specPage.":BannerLoader")===false
-	) {$chkSO=true;}
-
-	//Case Purge
-	if(stripos($pUri,"action=purge")!==false){$chkSO=true;}
-
-	/*
-	TODO:
-	confirm email,...
-	*/
+		) 
+		{$chkSO=true;}
 	}
 
 //Do the check
-if($chkSO){(stripos($pUri,"special:")!==false)?header('Location:./?title=Special:' . $connPage):header('Location:../?title=Special:'. $connPage);}
+if($chkSO)
+	{
+	header('Location:./?title=Special:' . $connPage);
+	//(stripos($pUri,"special:")!==false)?header('Location:./?title=Special:' . $connPage):header('Location:./?title=Special:'. $connPage);
+	}
 }
 
 //add script to hooks
