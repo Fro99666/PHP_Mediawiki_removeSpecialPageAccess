@@ -22,8 +22,8 @@ global $wgContLang,$wgUser,$wgRSPAallowedGrp;
 $connPage	= $wgContLang->mExtendedSpecialPageAliases["Userlogin"][0];
 $specPage	= $wgContLang->getNsText(-1);
 $chkSO		= false;
-$pInfo		= isset($_SERVER["PATH_INFO"])?$_SERVER["PATH_INFO"]:'';
-$pUri		= isset($_SERVER["QUERY_STRING"])?$_SERVER["QUERY_STRING"]:'';
+$pInfo		= isset($_SERVER["PATH_INFO"])?urlencode($_SERVER["PATH_INFO"]):'';
+$pUri		= isset($_SERVER["QUERY_STRING"])?urlencode($_SERVER["QUERY_STRING"]):'';
 
 //check if user defined RSPA Users group
 if(!isset($wgRSPAallowedGrp)){$wgRSPAallowedGrp=['sysop'];}
