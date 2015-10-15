@@ -7,11 +7,11 @@
 $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'removeSpecialPageAccess',
-	'description' => 'remove access to Special Page & Purge from anonymous',
+	'description' => 'remove access to Special Page & Purge from anonymous & not allowed groups',
 	'author' => 'admin@frogg.fr',
 	'version' => '0.0.1',
 	//AT WORK 'url' => 'https://www.mediawiki.org/wiki/Extension:Example',
-	'descriptionmsg' => 'remove access to Special Page & Purge from anonymous'
+	'descriptionmsg' => 'remove access to Special Page & Purge from anonymous & not allowed groups'
 );
 
 function removeSpecialPageAccess(){
