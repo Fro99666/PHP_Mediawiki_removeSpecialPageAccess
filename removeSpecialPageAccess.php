@@ -7,11 +7,11 @@
 $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'removeSpecialPageAccess',
-	'description' => 'remove access to Special Page & Purge from anonymous & not allowed groups',
+	'description' => 'remove access to Special Page & Purge from anonymous',
 	'author' => 'admin@frogg.fr',
 	'version' => '0.0.1',
 	//AT WORK 'url' => 'https://www.mediawiki.org/wiki/Extension:Example',
-	'descriptionmsg' => 'remove access to Special Page & Purge from anonymous & not allowed groups'
+	'descriptionmsg' => 'remove access to Special Page & Purge from anonymous'
 );
 
 function removeSpecialPageAccess(){
@@ -25,6 +25,11 @@ $chkSO		= false;
 $pInfo		= isset($_SERVER["PATH_INFO"])?urlencode($_SERVER["PATH_INFO"]):'';
 $pUri		= isset($_SERVER["QUERY_STRING"])?urlencode($_SERVER["QUERY_STRING"]):'';
 
+/*
+print_r($_SERVER);
+print_r($GLOBALS);
+*/
+
 //check if user defined RSPA Users group
 if(!isset($wgRSPAallowedGrp)){$wgRSPAallowedGrp=['sysop'];}
 
@@ -35,7 +40,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	 $pUri=urldecode($pUri);
 
 	//Case Special Page
-	if	( (stripos($pInfo,"/".$specPage.":")!==false || stripos($pUri,$specPage.":")!==false)
+	if	( (stripos($pInfo,"/".$specPage.":")===false || stripos($pUri,$specPage.":")===false)
 			&& stripos($pInfo,$specPage.":".$connPage)===false
 			&& stripos($pUri,$connPage)===false
 			&& stripos($pUri,"search=")===false
@@ -48,14 +53,16 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 			&& stripos($pUri,$specPage.":PasswordReset")===false
 			&& stripos($pUri,$specPage.":BannerLoader")===false
 			&& stripos($pInfo,$specPage.":BannerLoader")===false
-		) 
+		)
 		{$chkSO=true;}
 	}
 
 //Do the check
 if($chkSO)
 	{
-	header('Location:./?title=Special:' . $connPage);
+	header('Location:/index.php?title='.$specPage.':'. $connPage.'&returnto='.urlEncode(str_replace("/","",$_SERVER["PATH_INFO"])));
+	//header('Location:/index.php?title='.$specPage.':'. $connPage);
+	//header('Location:/index.php?title=Special:' . $connPage);
 	//(stripos($pUri,"special:")!==false)?header('Location:./?title=Special:' . $connPage):header('Location:./?title=Special:'. $connPage);
 	}
 }
