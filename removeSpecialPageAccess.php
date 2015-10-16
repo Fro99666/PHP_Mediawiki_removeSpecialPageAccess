@@ -30,7 +30,7 @@ print_r($_SERVER);
 print_r($GLOBALS);
 */
 
-if(isset($_SERVER['SCRIPT_NAME'])&&$_SERVER['SCRIPT_NAME']='/load.php')
+if(isset($_SERVER['SCRIPT_NAME'])&&$_SERVER['SCRIPT_NAME']=='/load.php')
         {return false;}
 
 //check if user defined RSPA Users group
@@ -39,8 +39,6 @@ if(!isset($wgRSPAallowedGrp)){$wgRSPAallowedGrp=['sysop'];}
 //if not in allowed groups
 if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	{
-	//getPath info
-	 $pUri=urldecode($pUri);
 
 	//Case Special Page
 	if	( (stripos($pInfo,"/".$specPage.":")!==false || stripos($pUri,$specPage.":")!==false)
@@ -61,13 +59,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	}
 
 //Do the check
-if($chkSO)
-	{
-	header('Location:/index.php?title='.$specPage.':'. $connPage.'&returnto='.urlEncode(str_replace("/","",$_SERVER["PATH_INFO"])));
-	//header('Location:/index.php?title='.$specPage.':'. $connPage);
-	//header('Location:/index.php?title=Special:' . $connPage);
-	//(stripos($pUri,"special:")!==false)?header('Location:./?title=Special:' . $connPage):header('Location:./?title=Special:'. $connPage);
-	}
+if($chkSO){header('Location:/index.php?title='.$specPage.':'. $connPage.'&returnto='.urlEncode(str_replace("/","",$_SERVER["PATH_INFO"])));}
 }
 
 //add script to hooks
