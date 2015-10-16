@@ -22,13 +22,16 @@ global $wgContLang,$wgUser,$wgRSPAallowedGrp;
 $connPage	= $wgContLang->mExtendedSpecialPageAliases["Userlogin"][0];
 $specPage	= $wgContLang->getNsText(-1);
 $chkSO		= false;
-$pInfo		= isset($_SERVER["PATH_INFO"])?urlencode($_SERVER["PATH_INFO"]):'';
-$pUri		= isset($_SERVER["QUERY_STRING"])?urlencode($_SERVER["QUERY_STRING"]):'';
+$pInfo		= isset($_SERVER["PATH_INFO"])?urldecode($_SERVER["PATH_INFO"]):'';
+$pUri		= isset($_SERVER["QUERY_STRING"])?urldecode($_SERVER["QUERY_STRING"]):'';
 
 /*
 print_r($_SERVER);
 print_r($GLOBALS);
 */
+
+if(isset($_SERVER['SCRIPT_NAME'])&&$_SERVER['SCRIPT_NAME']='/load.php')
+        {return false;}
 
 //check if user defined RSPA Users group
 if(!isset($wgRSPAallowedGrp)){$wgRSPAallowedGrp=['sysop'];}
@@ -40,7 +43,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	 $pUri=urldecode($pUri);
 
 	//Case Special Page
-	if	( (stripos($pInfo,"/".$specPage.":")===false || stripos($pUri,$specPage.":")===false)
+	if	( (stripos($pInfo,"/".$specPage.":")!==false || stripos($pUri,$specPage.":")!==false)
 			&& stripos($pInfo,$specPage.":".$connPage)===false
 			&& stripos($pUri,$connPage)===false
 			&& stripos($pUri,"search=")===false
