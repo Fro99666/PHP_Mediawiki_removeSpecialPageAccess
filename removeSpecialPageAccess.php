@@ -22,7 +22,7 @@ global $wgContLang,$wgUser,$wgRSPAallowedGrp;
 $connPage	= $wgContLang->mExtendedSpecialPageAliases["Userlogin"][0];
 $specPage	= $wgContLang->getNsText(-1);
 $chkSO		= false;
-$pInfo		= isset($_SERVER["PATH_INFO"])?urldecode($_SERVER["PATH_INFO"]):'';
+$pInfo		= isset($_SERVER["PHP_SELF"])?urldecode($_SERVER["PHP_SELF"]):'';
 $pUri		= isset($_SERVER["QUERY_STRING"])?urldecode($_SERVER["QUERY_STRING"]):'';
 
 /*
