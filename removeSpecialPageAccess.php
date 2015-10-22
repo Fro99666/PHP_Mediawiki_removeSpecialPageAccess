@@ -59,7 +59,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	}
 
 //Do the check
-if($chkSO){header('Location:/index.php?title='.$specPage.':'. $connPage.'&returnto='.urlEncode(str_replace("/","",$_SERVER["PATH_INFO"])));}
+if($chkSO){header('Location:/index.php?title='.$specPage.':'. $connPage.'&returnto='.urlEncode(str_replace($_SERVER["SCRIPT_NAME"]."/","",$_SERVER["PHP_SELF"])));}
 }
 
 //add script to hooks
