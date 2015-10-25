@@ -40,6 +40,9 @@ if(!isset($wgRSPAallowedGrp)){$wgRSPAallowedGrp=['sysop'];}
 if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	{
 
+        //case oldId pages
+        if (stripos($pUri,"&oldid")!==false){$chkSO=true;}
+
 	//Case Special Page
 	if	( (stripos($pInfo,"/".$specPage.":")!==false || stripos($pUri,$specPage.":")!==false)
 			&& stripos($pInfo,$specPage.":".$connPage)===false
