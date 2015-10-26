@@ -57,6 +57,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 			&& stripos($pUri,$specPage.":PasswordReset")===false
 			&& stripos($pUri,$specPage.":BannerLoader")===false
 			&& stripos($pInfo,$specPage.":BannerLoader")===false
+			&& stripos($pInfo,$specPage.":Export")===false
 		)
 		{$chkSO=true;}
 	}
