@@ -24,6 +24,7 @@ $specPage	= $wgContLang->getNsText(-1);
 $chkSO		= false;
 $pInfo		= isset($_SERVER["PHP_SELF"])?urldecode($_SERVER["PHP_SELF"]):'';
 $pUri		= isset($_SERVER["QUERY_STRING"])?urldecode($_SERVER["QUERY_STRING"]):'';
+if($pUri=='') {$pUri=isset($_SERVER["REDIRECT_URL"])?urldecode($_SERVER["REDIRECT_URL"]):'';}
 
 /*
 print_r($_SERVER);
@@ -39,9 +40,8 @@ if(!isset($wgRSPAallowedGrp)){$wgRSPAallowedGrp=['sysop'];}
 //if not in allowed groups
 if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	{
-
-        //case oldId pages
-        if (stripos($pUri,"&oldid")!==false){$chkSO=true;}
+    //case oldId pages
+    if (stripos($pUri,"&oldid")!==false){$chkSO=true;}
 
 	//Case Special Page
 	if	( (stripos($pInfo,"/".$specPage.":")!==false || stripos($pUri,$specPage.":")!==false)
