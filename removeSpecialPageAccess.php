@@ -65,8 +65,7 @@ if(count(array_intersect($wgRSPAallowedGrp,$wgUser->getEffectiveGroups()))==0)
 	}
 
 //Do the check
-if($chkSO){header('Location:/index.php?title='.$specPage.':'. $connPage.'&returnto='.urlEncode(str_replace($_SERVER["SCRIPT_NAME"]."/","",$_SERVER["PHP_SELF"])));}
-}
+if($chkSO){header('Location:/index.php?title='.$specPage.':'. $connPage.'&returnto='.str_replace("/","",urldecode($_SERVER["REQUEST_URI"])));}
 
 //add script to hooks
 $wgHooks['SpecialPage_initList'][]='removeSpecialPageAccess';
