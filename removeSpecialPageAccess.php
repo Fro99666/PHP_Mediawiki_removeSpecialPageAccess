@@ -22,8 +22,9 @@ global $wgContLang,$wgUser,$wgRSPAallowedGrp;
 $connPage	= $wgContLang->mExtendedSpecialPageAliases["Userlogin"][0];
 $specPage	= $wgContLang->getNsText(-1);
 $chkSO		= false;
-$pInfo		= isset($_SERVER["PHP_SELF"])?urldecode($_SERVER["PHP_SELF"]):'';
-$pUri		= isset($_SERVER["QUERY_STRING"])?urldecode($_SERVER["QUERY_STRING"]):'';
+$pInfo          = isset($_SERVER["REQUEST_URI"])?urldecode($_SERVER["REQUEST_URI"]):'';
+$pUri           = isset($_SERVER["QUERY_STRING"])?urldecode($_SERVER["QUERY_STRING"]):'';
+
 if($pUri=='') {$pUri=isset($_SERVER["REDIRECT_URL"])?urldecode($_SERVER["REDIRECT_URL"]):'';}
 
 /*
